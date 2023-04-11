@@ -11,6 +11,10 @@ const personSchema = new mongoose.Schema({
 })
 
 let Person = new mongoose.model('Person', personSchema)
+/* Person.findById('6435c713c6d6bf3d447043fb').then(result => {
+  result.favoriteFoods.push('test1123')
+  result.save().then(res => console.log(res))
+}) */
 
 const createAndSavePerson = (done) => {
   let personDocument = new Person({name: 'ismael', age: 29, favoriteFoods: ['tacos']})
@@ -40,11 +44,16 @@ const findPersonById = (personId, done) => {
   //done(null /*, data*/);
 };
 
+findPersonById('6435c713c6d6bf3d447043fb', (err, data) => {
+  console.log(data)
+})
+
+
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-  Person.update({_id: personId}, {$push: {favoriteFoods: foodToAdd}})
-  .then(result => done(null, result))
-  .catch(err => done(null, err))
+  findPersonById(personId, (err, result) => {
+    result.favoriteFoods.push(foodToAdd).save().then(res => done(null, res)).catch(err => done(null,err))
+  })
 
   //done(null /*, data*/);
 };
