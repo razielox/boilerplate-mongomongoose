@@ -24,12 +24,16 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 const findPeopleByName = (personName, done) => {
-  Person.find({name:personName}).then(result => done(null, result)).catch(err => done(null, err))
+  Person.find({name:personName})
+  .then(result => done(null, result))
+  .catch(err => done(null, err))
   //done(null /*, data*/);
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods: food}).then(result => done(null, result))
+  .catch(err => done(null, err))
+  //done(null /*, data*/);
 };
 
 const findPersonById = (personId, done) => {
