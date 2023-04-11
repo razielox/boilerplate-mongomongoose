@@ -31,13 +31,13 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: food}).then(result => done(null, result))
-  .catch(err => done(null, err))
+  Person.findOne({favoriteFoods: food}).then(result => done(null, result)).catch(err => done(null, err))
   //done(null /*, data*/);
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById({_id:personId}).then(result => done(null, result)).catch(err => done(null, err))
+  //done(null /*, data*/);
 };
 
 const findEditThenSave = (personId, done) => {
