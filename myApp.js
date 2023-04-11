@@ -44,15 +44,19 @@ const findPersonById = (personId, done) => {
   //done(null /*, data*/);
 };
 
-findPersonById('6435c713c6d6bf3d447043fb', (err, data) => {
+/* findPersonById('6435c713c6d6bf3d447043fb', (err, data) => {
   console.log(data)
-})
+  data.favoriteFoods.push('test')
+  console.log(data)
+}) */
 
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-  findPersonById(personId, (err, result) => {
-    result.favoriteFoods.push(foodToAdd).save().then(res => done(null, res)).catch(err => done(null,err))
+  findPersonById(personId, (err, data) => {
+    data.favoriteFoods.push(foodToAdd)
+    data.save().then(result => done(null, result)).catch(err => done(null, err))
+
   })
 
   //done(null /*, data*/);
