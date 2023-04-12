@@ -83,10 +83,11 @@ const removeManyPeople = (done) => {
   Person.remove({name:nameToRemove}).then(result => done(null, result)).catch(err => done(null, err))
   //done(null /*, data*/);
 };
+  //console.log(Person.find({favoriteFoods: 'burrito'}).sort({name: 1}).limit(2).select({name:1, favoriteFoods: 1}).exec(result => console.log(result)))
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-  Person.find({favoriteFoods: foodToSearch}).sort({name: 1}).limit(2).exec((err, data) => {done(err, data)})
+  Person.find({favoriteFoods: foodToSearch}).sort({name: 1}).limit(2).select({name:1, favoriteFoods: 1}).exec().then(result => done(null, result)).catch(err => done(null, err))
   //done(null /*, data*/);
 };
 
